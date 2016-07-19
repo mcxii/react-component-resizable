@@ -60,6 +60,9 @@ var Resizable = React.createClass({
   },
 
   onScroll: function () {
+    if (typeof this.props.onScroll === "function") {
+      this.props.onScroll();
+    }
     if (this.r) this.cancelFrame(this.r);
     this.r = this.requestFrame(function () {
       var dimensions = this.getDimensions();
