@@ -41,8 +41,6 @@ module.exports = Object.assign || function (target, source) {
 (function (global){
 'use strict';
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
 var React = global.React || require('react');
 var objectAssign = require('object-assign');
 
@@ -134,19 +132,9 @@ var Resizable = React.createClass({
   },
 
   render: function render() {
-    var _props = this.props;
-    var triggersClass = _props.triggersClass;
-    var expandClass = _props.expandClass;
-    var contractClass = _props.contractClass;
-    var embedCss = _props.embedCss;
-    var onResize = _props.onResize;
-
-    var rest = _objectWithoutProperties(_props, ['triggersClass', 'expandClass', 'contractClass', 'embedCss', 'onResize']);
-
-    var props = objectAssign({}, rest, { onScroll: this.onScroll, ref: 'resizable' });
-    return React.createElement('div', props, [this.props.children, React.createElement('div', { className: triggersClass, key: 'trigger' }, [React.createElement('div', { className: expandClass, ref: 'expand', key: 'expand' }, React.createElement('div', { ref: 'expandChild' })), React.createElement('div', { className: contractClass, ref: 'contract', key: 'contract' })]), embedCss ? React.createElement('style', { key: 'embededCss', dangerouslySetInnerHTML: { __html: '.resize-triggers { visibility: hidden; } .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }' } }) : null]);
+    var props = objectAssign({}, this.props, { onScroll: this.onScroll, ref: 'resizable' });
+    return React.createElement('div', props, [props.children, React.createElement('div', { className: props.triggersClass, key: 'trigger' }, [React.createElement('div', { className: props.expandClass, ref: 'expand', key: 'expand' }, React.createElement('div', { ref: 'expandChild' })), React.createElement('div', { className: props.contractClass, ref: 'contract', key: 'contract' })]), props.embedCss ? React.createElement('style', { key: 'embededCss', dangerouslySetInnerHTML: { __html: '.resize-triggers { visibility: hidden; } .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }' } }) : null]);
   }
-
 });
 
 module.exports = Resizable;

@@ -87,24 +87,22 @@ var Resizable = React.createClass({
   },
 
   render: function() {
-    const {triggersClass, expandClass, contractClass, embedCss, onResize, ...rest} = this.props;
-    var props = objectAssign({}, rest, {onScroll: this.onScroll, ref: 'resizable'});
+    const props = objectAssign({}, this.props, {onScroll: this.onScroll, ref: 'resizable'});
     return (
       React.createElement('div', props,
         [
-          this.props.children,
-          React.createElement('div', {className: triggersClass, key: 'trigger'},
+          props.children,
+          React.createElement('div', {className: props.triggersClass, key: 'trigger'},
             [
-              React.createElement('div', {className: expandClass, ref: 'expand', key: 'expand'}, React.createElement('div', {ref: 'expandChild'})),
-              React.createElement('div', {className: contractClass, ref: 'contract', key: 'contract'})
+              React.createElement('div', {className: props.expandClass, ref: 'expand', key: 'expand'}, React.createElement('div', {ref: 'expandChild'})),
+              React.createElement('div', {className: props.contractClass, ref: 'contract', key: 'contract'})
             ]
           ),
-          embedCss ? React.createElement('style', {key: 'embededCss', dangerouslySetInnerHTML: {__html: '.resize-triggers { visibility: hidden; } .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }'}}) : null
+          props.embedCss ? React.createElement('style', {key: 'embededCss', dangerouslySetInnerHTML: {__html: '.resize-triggers { visibility: hidden; } .resize-triggers, .resize-triggers > div, .contract-trigger:before { content: \" \"; display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; } .resize-triggers > div { background: #eee; overflow: auto; } .contract-trigger:before { width: 200%; height: 200%; }'}}) : null
         ]
       )
     );
   }
-
 });
 
 module.exports = Resizable;
